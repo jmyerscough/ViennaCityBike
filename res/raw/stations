@@ -47,7 +47,7 @@ INSERT INTO Stations VALUES(1076, 'Siebensternplatz', 23, 22, 0, 'aktiv', 46, 48
 INSERT INTO Stations VALUES(1043, 'Urban Loritz Platz', 17, 15, 1, 'aktiv', 47, 48.201035, 16.337727);
 INSERT INTO Stations VALUES(1063, 'Webgasse', 14, 14, 0, 'aktiv', 48, 48.196728, 16.343983);
 INSERT INTO Stations VALUES(1061, 'Weghuberpark', 20, 19, 1, 'aktiv', 49, 48.206005, 16.356432);
-INSERT INTO Stations VALUES(1051, 'Alser Stra§e/Feldgasse', 12, 7, 5, 50, 48.215225, 16.346449);
+INSERT INTO Stations VALUES(1051, 'Alser Stra§e/Feldgasse', 12, 7, 5, 'aktiv', 50, 48.215225, 16.346449);
 INSERT INTO Stations VALUES(1119, 'Althanstra§e', 22, 19, 3, 'aktiv', 51, 48.228947, 16.359613);
 INSERT INTO Stations VALUES(1120, 'Bauernfeldplatz', 24, 1, 23, 'aktiv', 52, 48.221111, 16.360186);
 INSERT INTO Stations VALUES(1037, 'Boltzmanngasse', 20, 16, 1, 'aktiv', 53, 48.220345, 16.356392);

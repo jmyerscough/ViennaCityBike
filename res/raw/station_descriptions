@@ -47,7 +47,7 @@ INSERT INTO StationDescriptions VALUES (46, '', 'Siebensterngasse vor 38 - 40');
 INSERT INTO StationDescriptions VALUES (47, '', 'Neubaugürtel/Märzstraße U6 Station Burggasse - Ausgang Urban Loritz Platz');
 INSERT INTO StationDescriptions VALUES (48, '', 'Mariahilferstraße 104 Ecke Schottenfeldgasse');
 INSERT INTO StationDescriptions VALUES (49, '', 'Museumstraße 7 nähe Neustiftgasse');
-INSERT INTO StationDescriptions VALUES (50, '', 'aktiv', 'Alser Straße ONR 47');
+INSERT INTO StationDescriptions VALUES (50, '', 'Alser Straße ONR 47');
 INSERT INTO StationDescriptions VALUES (51, '', '');
 INSERT INTO StationDescriptions VALUES (52, '', '');
 INSERT INTO StationDescriptions VALUES (53, '', 'Währinger Straße Ecke Boltzmanngasse');
