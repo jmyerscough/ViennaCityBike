@@ -26,10 +26,10 @@ public class ViennaCityBikeDBOpenHelper extends SQLiteOpenHelper
 				    ViennaCityBikeDatabase.FREE_BOXES +     " INTEGER, " +
 				    ViennaCityBikeDatabase.FREE_BIKES +     " INTEGER, " +
 				    ViennaCityBikeDatabase.STATION_STATUS + " TEXT, " +
-				    ViennaCityBikeDatabase.DESCRIPTION_ID + " INTEGER REFERENCES StationDescriptions (descriptionId), " +
+				    ViennaCityBikeDatabase.DESCRIPTION_ID + " INTEGER REFERENCES " + STATION_DESCRIPTIONS_TABLE + " ( " + ViennaCityBikeDatabase.DESCRIPTION_ID + "), " +
 				    ViennaCityBikeDatabase.LONGITUDE +      " REAL, " +
 				    ViennaCityBikeDatabase.LATITUDE +       " REAL, " +
-				    ViennaCityBikeDatabase.DISTRICT_ID +    " INTEGER REFERENCES Districts (district) " +
+				    ViennaCityBikeDatabase.DISTRICT_ID +    " INTEGER REFERENCES " + DISTRICTS_TABLE + " (" + ViennaCityBikeDatabase.DISTRICT_ID + ") " +
 				");";
 	
 	private static final String CREATE_STATION_DESCRIPTION_TABLE = "CREATE TABLE " + STATION_DESCRIPTIONS_TABLE +
@@ -67,6 +67,10 @@ public class ViennaCityBikeDBOpenHelper extends SQLiteOpenHelper
 		
 	}
 
+	/**
+	 * 
+	 * @param db The DB the method writes to.
+	 */
 	private void populateStationDescriptionTable(SQLiteDatabase db)
 	{
 		ContentValues rowValues = new ContentValues();
@@ -546,7 +550,32 @@ public class ViennaCityBikeDBOpenHelper extends SQLiteOpenHelper
 		db.insert(STATION_DESCRIPTIONS_TABLE, null, rowValues);
 		rowValues.clear();
 	}
+
+	/**
+	 * 
+	 * @param db The DB to write to.
+	 */
+	private void populateStationsTable(SQLiteDatabase db)
+	{
+		ContentValues newRow = new ContentValues();
+		
+/*	    ViennaCityBikeDatabase.STATION_ID
+	    ViennaCityBikeDatabase.STATION_NAME
+	    ViennaCityBikeDatabase.TOTAL_BOXE
+	    ViennaCityBikeDatabase.FREE_BOXES
+	    ViennaCityBikeDatabase.FREE_BIKES
+	    ViennaCityBikeDatabase.STATION_STATUS
+	    ViennaCityBikeDatabase.DESCRIPTION_ID
+	    ViennaCityBikeDatabase.LONGITUDE
+	    ViennaCityBikeDatabase.LATITUDE
+	    ViennaCityBikeDatabase.DISTRICT_ID */
+		
+		
+	}
 	
+	/**
+	 * 
+	 */
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) 
 	{
