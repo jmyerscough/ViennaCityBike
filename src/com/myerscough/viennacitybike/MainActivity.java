@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -16,6 +17,11 @@ import com.google.android.gms.maps.model.LatLng;
 
 import com.myerscough.viennacitybike.db.*;
 
+/**
+ * Application's main activity.
+ * @author Jason Myerscough
+ *
+ */
 public class MainActivity extends Activity
 {
 	private static final String LOG_DESCRIPTION = "MainActivity";
@@ -38,6 +44,9 @@ public class MainActivity extends Activity
         setDefaultMapPosition();
     }
     
+    /**
+     * Centers the map around vienna.
+     */
     private void setDefaultMapPosition()
     {
     	GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
@@ -47,9 +56,8 @@ public class MainActivity extends Activity
     		Log.v(LOG_DESCRIPTION, "map object available.");
     		
     		// set vienna as the center point of the map
-    		map.moveCamera(CameraUpdateFactory.newLatLngZoom(VIENNA, DEFAULT_ZOOM));
-    		//map.animateCamera(CameraUpdateFactory.zoomIn());
-    		
+    		CameraUpdate camUpdate = CameraUpdateFactory.newLatLngZoom(VIENNA, DEFAULT_ZOOM);
+    		map.animateCamera(camUpdate);
     	}
     	else
     		Log.v(LOG_DESCRIPTION, "No map object available");
