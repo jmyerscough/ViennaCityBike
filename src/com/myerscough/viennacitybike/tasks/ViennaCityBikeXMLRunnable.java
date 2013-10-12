@@ -6,9 +6,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 
-import android.R;
 import android.util.Log;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -38,7 +36,6 @@ public class ViennaCityBikeXMLRunnable implements Runnable
 	public void run()
 	{
 		String bikeFeed = "http://dynamisch.citybikewien.at/citybike_xml.php";
-		ArrayList<BikeStation> stations = new ArrayList<BikeStation>();
 
 		informStart();		
 		try
@@ -51,7 +48,7 @@ public class ViennaCityBikeXMLRunnable implements Runnable
 			
 			if (responseCode == HttpURLConnection.HTTP_OK)
 			{
-				stations = parseXML(httpConnection.getInputStream());
+				parseXML(httpConnection.getInputStream());
 			}
 		}
 		catch (MalformedURLException e)
@@ -62,14 +59,12 @@ public class ViennaCityBikeXMLRunnable implements Runnable
 		{
 			Log.d(CLASS_TAG, String.format("%s", ioe.getMessage()));
 		}
-		
-		informFinish(stations);
+		informFinish();
 	}
 	
-	private ArrayList<BikeStation> parseXML(InputStream in)
+	private void parseXML(InputStream in)
 	{
 		XmlPullParserFactory xmlFactory;
-		ArrayList<BikeStation> stations = null;
 		
 		try
 		{
@@ -88,9 +83,6 @@ public class ViennaCityBikeXMLRunnable implements Runnable
 				{
 					eventType = xpp.next();
 					BikeStation newStation = new BikeStation();
-					
-					if (stations == null)
-						stations = new ArrayList<BikeStation>();
 					
 					while (!(eventType == XmlPullParser.END_TAG &&
 							xpp.getName().equals("station")))
@@ -120,7 +112,8 @@ public class ViennaCityBikeXMLRunnable implements Runnable
 						}
 						eventType = xpp.next();
 					}
-					stations.add(newStation);
+					
+					// TODO put a station on the queue
 				}
 				eventType = xpp.next();
 			}
@@ -133,16 +126,18 @@ public class ViennaCityBikeXMLRunnable implements Runnable
 		{
 			Log.e(CLASS_TAG, String.format("%s", ioe.getMessage()));
 		}
-		
-		return stations;
 	}
 	
 	private void informStart()
 	{
 	}
 	
-	private void informFinish(ArrayList<BikeStation> stations)
+	private void sendStationToQueue(BikeStation station)
 	{
 		
+	}
+	
+	private void informFinish()
+	{
 	}
 }
