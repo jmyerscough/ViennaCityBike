@@ -5,6 +5,12 @@ import com.google.android.gms.maps.model.LatLng;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/**
+ * 
+ * @author Jason Myerscough
+ * @since 12.10.2013
+ *
+ */
 public class BikeStation implements Parcelable
 {
 	private int id;
@@ -141,12 +147,28 @@ public class BikeStation implements Parcelable
 	@Override
 	public void writeToParcel(Parcel out, int flags)
 	{
-		// write the members
+		out.writeInt(getId());
+		out.writeString(getName());
+		out.writeInt(getTotalBoxes());
+		out.writeInt(getFreeBoxes());
+		out.writeInt(getFreeBikes());
+		out.writeString(getStatus());
+		out.writeString(getDescription());
+		out.writeDouble(latitude);
+		out.writeDouble(longitude);
 	}
 	
 	private BikeStation(Parcel in)
 	{
-		// read the members
+		setId(in.readInt());
+		setName(in.readString());
+		setTotalBoxes(in.readInt());
+		setFreeBoxes(in.readInt());
+		setFreeBikes(in.readInt());
+		setStatus(in.readString());
+		setDescription(in.readString());
+		setLatitude(in.readDouble());
+		setLongitude(in.readDouble());
 	}
 
 }
