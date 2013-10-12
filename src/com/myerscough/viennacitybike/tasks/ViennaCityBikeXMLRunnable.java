@@ -7,6 +7,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -112,8 +114,7 @@ public class ViennaCityBikeXMLRunnable implements Runnable
 						}
 						eventType = xpp.next();
 					}
-					
-					// TODO put a station on the queue
+					sendStationToQueue(newStation);
 				}
 				eventType = xpp.next();
 			}
@@ -130,14 +131,31 @@ public class ViennaCityBikeXMLRunnable implements Runnable
 	
 	private void informStart()
 	{
+		Message msg = handler.obtainMessage();
+		Bundle bundle = new Bundle();
+		
+		bundle.putString("status", "started querying web service.");
+		msg.setData(bundle);
+		handler.sendMessage(msg);
 	}
 	
 	private void sendStationToQueue(BikeStation station)
 	{
+		Message msg = handler.obtainMessage();
+		Bundle bundle = new Bundle();
 		
+		bundle.putParcelable("station", station);
+		msg.setData(bundle);
+		handler.sendMessage(msg);
 	}
 	
 	private void informFinish()
 	{
+		Message msg = handler.obtainMessage();
+		Bundle bundle = new Bundle();
+		
+		bundle.putString("status", "finished querying web service.");
+		msg.setData(bundle);
+		handler.sendMessage(msg);
 	}
 }
