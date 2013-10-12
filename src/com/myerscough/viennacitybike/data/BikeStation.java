@@ -23,6 +23,11 @@ public class BikeStation implements Parcelable
 	private double latitude;
 	private double longitude;
 	
+	public BikeStation()
+	{
+		
+	}
+	
 	public BikeStation(int id, String name, int totalBoxes, int freeBoxes, 
 			int freeBikes, String status, String description, double latitude, double longitude)
 	{
