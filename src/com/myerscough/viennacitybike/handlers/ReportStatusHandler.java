@@ -1,6 +1,7 @@
 package com.myerscough.viennacitybike.handlers;
 
 import com.myerscough.viennacitybike.MainActivity;
+import com.myerscough.viennacitybike.data.BikeStation;
 
 import android.os.Handler;
 import android.os.Message;
@@ -29,5 +30,13 @@ public class ReportStatusHandler extends Handler
 	public void handleMessage(Message message)
 	{
 		super.handleMessage(message);
+		BikeStation bikeStation;
+		
+		if (message.getData().containsKey("station"))
+		{
+			bikeStation = (BikeStation)message.getData().getParcelable("station");
+			if (bikeStation != null)
+				mainActivity.addBikeStationToMap(bikeStation);
+		}
 	}
 }
