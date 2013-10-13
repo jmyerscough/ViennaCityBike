@@ -79,7 +79,7 @@ public class BikeStation implements Parcelable
 	
 	public LatLng getLocation()
 	{
-		LatLng loc = new LatLng(longitude, latitude);
+		LatLng loc = new LatLng(latitude, longitude);
 		return loc;
 	}
 	
