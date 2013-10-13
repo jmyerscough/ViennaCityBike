@@ -15,6 +15,7 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -22,6 +23,7 @@ import com.myerscough.viennacitybike.data.BikeStation;
 import com.myerscough.viennacitybike.db.*;
 import com.myerscough.viennacitybike.handlers.ReportStatusHandler;
 import com.myerscough.viennacitybike.tasks.ViennaCityBikeXMLRunnable;
+import com.myerscough.viennacitybike.views.BikeStationInfoWindow;
 
 /**
  * Application's main activity.
@@ -84,6 +86,9 @@ public class MainActivity extends Activity
    public void addBikeStationToMap(BikeStation bikeStation)
    {
 	   GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+	   float percent = (float)(((float)bikeStation.getFreeBikes() / (float)bikeStation.getTotalBoxes()) * 100.0);
+	   float markerColour = BitmapDescriptorFactory.HUE_GREEN;
+	   
 	   
 	   if (map != null)
 	   {
@@ -92,6 +97,18 @@ public class MainActivity extends Activity
 		   MarkerOptions marker = new MarkerOptions();
 		   marker.position(bikeStation.getLocation());
 		   marker.title(bikeStation.getName());
+		   marker.snippet(String.format("Bike Station: %s\nDescription: %s\nTotal Boxes: %d\nFree Boxes: %d\nFree Bikes: %d",
+				   bikeStation.getName(), bikeStation.getDescription(), bikeStation.getTotalBoxes(),
+				   bikeStation.getFreeBoxes(), bikeStation.getFreeBikes(), percent));
+		   
+		   // set the icon colour
+		   if (percent <= 20)
+			   markerColour = BitmapDescriptorFactory.HUE_RED;
+		   else if (percent <= 60)
+			   markerColour = BitmapDescriptorFactory.HUE_YELLOW;
+		   marker.icon(BitmapDescriptorFactory.defaultMarker(markerColour));
+		   
+		   map.setInfoWindowAdapter(new BikeStationInfoWindow(this.getLayoutInflater()));
 		   map.addMarker(marker);
 	   }
    }
