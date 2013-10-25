@@ -82,7 +82,7 @@ public class MainActivity extends Activity
 	   GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 	   float percent = (float)(((float)bikeStation.getFreeBikes() / (float)bikeStation.getTotalBoxes()) * 100.0);
 	   float markerColour = BitmapDescriptorFactory.HUE_GREEN;
-	   BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.pin_bike_green);
+	   BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_bike_green);
 	   
 	   if (map != null)
 	   {
@@ -99,12 +99,12 @@ public class MainActivity extends Activity
 		   if (percent <= 20)
 		   {
 			   markerColour = BitmapDescriptorFactory.HUE_RED;
-			   icon = BitmapDescriptorFactory.fromResource(R.drawable.pin_bike_red);
+			   icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_bike_red);
 		   }
 		   else if (percent <= 60)
 		   {
 			   markerColour = BitmapDescriptorFactory.HUE_YELLOW;
-			   icon = BitmapDescriptorFactory.fromResource(R.drawable.pin_bike_yellow);
+			   icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_bike_yellow);
 		   }
 		   //marker.icon(BitmapDescriptorFactory.defaultMarker(markerColour));
 		   marker.icon(icon);
