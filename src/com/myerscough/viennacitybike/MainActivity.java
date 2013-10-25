@@ -38,18 +38,11 @@ public class MainActivity extends Activity
 	private ArrayList<BikeStation> bikeStations = new ArrayList<BikeStation>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) 
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
-        //String [] resultColumns = new String [] {ViennaCityBikeDatabase.STATION_NAME};
-        //ViennaCityBikeDBOpenHelper helper = new ViennaCityBikeDBOpenHelper(this); 
-        //
-        //SQLiteDatabase db = helper.getWritableDatabase();
-        //Cursor cursor = db.query(ViennaCityBikeDBOpenHelper.STATIONS_TABLE, resultColumns, null, null, null, null, null);
-        //
-        //Toast.makeText(this, String.format("row count=%d", cursor.getCount()), 1000).show();
-        
+
         ReportStatusHandler handler = new ReportStatusHandler(this);
         Thread t = new Thread(new ViennaCityBikeXMLRunnable(handler));
         t.start();
