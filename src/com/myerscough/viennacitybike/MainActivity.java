@@ -15,6 +15,7 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -81,7 +82,7 @@ public class MainActivity extends Activity
 	   GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 	   float percent = (float)(((float)bikeStation.getFreeBikes() / (float)bikeStation.getTotalBoxes()) * 100.0);
 	   float markerColour = BitmapDescriptorFactory.HUE_GREEN;
-	   
+	   BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.pin_bike_green);
 	   
 	   if (map != null)
 	   {
@@ -96,10 +97,17 @@ public class MainActivity extends Activity
 		   
 		   // set the icon colour
 		   if (percent <= 20)
+		   {
 			   markerColour = BitmapDescriptorFactory.HUE_RED;
+			   icon = BitmapDescriptorFactory.fromResource(R.drawable.pin_bike_red);
+		   }
 		   else if (percent <= 60)
+		   {
 			   markerColour = BitmapDescriptorFactory.HUE_YELLOW;
-		   marker.icon(BitmapDescriptorFactory.defaultMarker(markerColour));
+			   icon = BitmapDescriptorFactory.fromResource(R.drawable.pin_bike_yellow);
+		   }
+		   //marker.icon(BitmapDescriptorFactory.defaultMarker(markerColour));
+		   marker.icon(icon);
 		   
 		   map.setInfoWindowAdapter(new BikeStationInfoWindow(this.getLayoutInflater()));
 		   map.addMarker(marker);
