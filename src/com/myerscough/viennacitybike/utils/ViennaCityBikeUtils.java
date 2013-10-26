@@ -27,6 +27,6 @@ public class ViennaCityBikeUtils
 					return true;
 			}
 		}
-		return true;
+		return false;
 	}
 }
