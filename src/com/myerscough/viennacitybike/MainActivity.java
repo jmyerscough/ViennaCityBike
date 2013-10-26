@@ -24,6 +24,7 @@ import com.myerscough.viennacitybike.data.BikeStation;
 import com.myerscough.viennacitybike.db.*;
 import com.myerscough.viennacitybike.handlers.ReportStatusHandler;
 import com.myerscough.viennacitybike.tasks.ViennaCityBikeXMLRunnable;
+import com.myerscough.viennacitybike.utils.ViennaCityBikeUtils;
 import com.myerscough.viennacitybike.views.BikeStationInfoWindow;
 
 /**
@@ -114,7 +115,7 @@ public class MainActivity extends Activity
 	   }
    }
    
-   @Override
+   @Override	
    protected void onPause() 
    {
 	   GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
@@ -127,7 +128,17 @@ public class MainActivity extends Activity
    protected void onResume()
    {
 	   super.onResume();
-	   updateBikeStatus();
+	   
+	   if (ViennaCityBikeUtils.isDeviceOnline(this) == true)
+		   updateBikeStatus();
+   }
+   
+   @Override
+   protected void onStart()
+   {
+	   super.onStart();
+	   if (ViennaCityBikeUtils.isDeviceOnline(this) == false)
+		   Toast.makeText(this, getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
    }
 
 public void addBikeStation(BikeStation station)
