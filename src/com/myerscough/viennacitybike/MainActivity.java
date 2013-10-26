@@ -43,8 +43,11 @@ public class MainActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        ReportStatusHandler handler = new ReportStatusHandler(this);
+    }
+    
+    private void updateBikeStatus()
+    {
+    	ReportStatusHandler handler = new ReportStatusHandler(this);
         Thread t = new Thread(new ViennaCityBikeXMLRunnable(handler));
         t.start();
         
@@ -81,8 +84,7 @@ public class MainActivity extends Activity
    {
 	   GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 	   float percent = (float)(((float)bikeStation.getFreeBikes() / (float)bikeStation.getTotalBoxes()) * 100.0);
-	   float markerColour = BitmapDescriptorFactory.HUE_GREEN;
-	   BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_bike_green);
+	   BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_bike_green);
 	   
 	   if (map != null)
 	   {
@@ -98,15 +100,13 @@ public class MainActivity extends Activity
 		   // set the icon colour
 		   if (percent <= 20)
 		   {
-			   markerColour = BitmapDescriptorFactory.HUE_RED;
-			   icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_bike_red);
+			   icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_bike_red);
 		   }
 		   else if (percent <= 60)
 		   {
-			   markerColour = BitmapDescriptorFactory.HUE_YELLOW;
-			   icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_bike_yellow);
+			   icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_bike_yellow);
 		   }
-		   //marker.icon(BitmapDescriptorFactory.defaultMarker(markerColour));
+		   marker.flat(true);
 		   marker.icon(icon);
 		   
 		   map.setInfoWindowAdapter(new BikeStationInfoWindow(this.getLayoutInflater()));
@@ -114,7 +114,23 @@ public class MainActivity extends Activity
 	   }
    }
    
-   public void addBikeStation(BikeStation station)
+   @Override
+   protected void onPause() 
+   {
+	   GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+	   super.onPause();
+	   
+	   map.clear();
+   }
+
+   @Override
+   protected void onResume()
+   {
+	   super.onResume();
+	   updateBikeStatus();
+   }
+
+public void addBikeStation(BikeStation station)
    {
 	   bikeStations.add(station);
    }
