@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name">ViennaCityBike</string>
+    <string name="app_name">Vienna City Bike Finder</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="vcb_web_address">http://dynamisch.citybikewien.at/citybike_xml.php</string>
     <string name="no_description">No description</string>
+    <string name="no_network">The device has no network connection</string>
 </resources>
